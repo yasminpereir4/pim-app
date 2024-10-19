@@ -1,8 +1,11 @@
+import { useNavigation } from "@react-navigation/native";
 import { Image, Text, TouchableOpacity, View } from "react-native";
 
 interface IndexProps {}
 
 export const Index: React.FC<IndexProps> = () => {
+  const { navigate } = useNavigation();
+
   return (
     <View className="flex-1 bg-[#FB923C] p-6">
       <View className="justify-center items-center flex-1 ">
@@ -16,7 +19,10 @@ export const Index: React.FC<IndexProps> = () => {
         </Text>
       </View>
       <View className="mt-auto">
-        <TouchableOpacity className="rounded-full bg-white px-4 py-4 mt-4">
+        <TouchableOpacity
+          onPress={() => navigate("Login")}
+          className="rounded-full bg-white px-4 py-4 mt-4"
+        >
           <Text className="text-lg font-medium text-[#FB923C] text-center">
             Começar
           </Text>
