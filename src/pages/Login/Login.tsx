@@ -26,6 +26,14 @@ export const Login: React.FC<LoginProps> = () => {
     resolver: zodResolver(loginValidationSchema),
   });
 
+  function handleLogin() {
+    try {
+      navigate("Home");
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <View className="flex-1">
       <ImageBackground
@@ -109,7 +117,7 @@ export const Login: React.FC<LoginProps> = () => {
 
             <View className="mt-5">
               <TouchableOpacity
-                onPress={() => {}}
+                onPress={handleLogin}
                 className="rounded-2xl bg-[#FB923C] px-4 py-4 mt-4"
               >
                 <Text className="text-lg font-medium text-[#FFFFFF] text-center">
