@@ -1,29 +1,44 @@
 import Entypo from "@expo/vector-icons/Entypo";
-import { useState } from "react";
-
+import Feather from "@expo/vector-icons/Feather";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { BlurView } from "expo-blur";
+import { StyleSheet } from "react-native";
+import { BackgroundCircleIconNavigator } from "../components/BackgroundCircleIconNavigator";
+import { useAuthContext } from "../contexts/AuthContext";
 import { AuthStack } from "./AuthStack";
 import { HomeStack } from "./HomeStack";
+import { ProfileStack } from "./ProfileStack";
 
 const Tab = createBottomTabNavigator();
 
 interface RoutesProps {}
 
 export const Routes: React.FC<RoutesProps> = () => {
-  const isAuthenticated = useState(false);
+  const { isAuthenticated } = useAuthContext();
 
-  if (isAuthenticated) {
+  if (!isAuthenticated) {
     return <AuthStack />;
   }
+
   return (
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
+        tabBarBackground: () => (
+          <BlurView
+            tint="light"
+            intensity={2}
+            style={StyleSheet.absoluteFill}
+          />
+        ),
         tabBarActiveTintColor: "#FFFFFF",
         tabBarStyle: {
-          height: 60,
+          height: 80,
+          elevation: 0,
           borderTopWidth: 0,
-          backgroundColor: "#FB923C",
+          shadowOpacity: 0,
+          position: "absolute",
+          backgroundColor: "#f97316",
         },
         tabBarLabelStyle: {
           fontSize: 12,
@@ -31,15 +46,36 @@ export const Routes: React.FC<RoutesProps> = () => {
           marginBottom: 7,
           fontWeight: "400",
         },
+        tabBarLabel: () => null,
       }}
     >
       <Tab.Screen
         name="HomeStack"
         component={HomeStack}
         options={{
-          tabBarLabel: "Home",
-          tabBarIcon: ({ color, size }) => (
-            <Entypo name="home" size={size} color={color} />
+          tabBarIcon: ({ size, focused }) => (
+            <BackgroundCircleIconNavigator focused={focused}>
+              <Entypo
+                name="home"
+                size={size}
+                color={focused ? "#f97316" : "#FFFFFF"}
+              />
+            </BackgroundCircleIconNavigator>
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="ProfileStack"
+        component={ProfileStack}
+        options={{
+          tabBarIcon: ({ size, focused }) => (
+            <BackgroundCircleIconNavigator focused={focused}>
+              <Feather
+                name="user"
+                size={size}
+                color={focused ? "#f97316" : "#FFFFFF"}
+              />
+            </BackgroundCircleIconNavigator>
           ),
         }}
       />

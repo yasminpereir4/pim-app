@@ -1,7 +1,10 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigation } from "@react-navigation/native";
+import { AxiosError } from "axios";
 import { Controller, useForm } from "react-hook-form";
 import {
+  ActivityIndicator,
+  Alert,
   Image,
   ImageBackground,
   Text,
@@ -12,27 +15,42 @@ import { ErrorMessage } from "../../components/ErrorMessage";
 import { GoBackButton } from "../../components/GoBackButton";
 import { InputPassword } from "../../components/InputPassword";
 import { InputText } from "../../components/InputText";
+import { useAuthContext } from "../../contexts/AuthContext";
 import { LoginFormInput, loginValidationSchema } from "../../validation/login";
 
 interface LoginProps {}
 
 export const Login: React.FC<LoginProps> = () => {
   const { goBack, navigate } = useNavigation();
+  const { login } = useAuthContext();
   const {
     control,
+    setError,
     handleSubmit,
     formState: { isSubmitting },
   } = useForm<LoginFormInput>({
     resolver: zodResolver(loginValidationSchema),
   });
 
-  function handleLogin() {
+  const handleLogin = handleSubmit(async values => {
     try {
-      navigate("Home");
+      await login({
+        email: values.email,
+        senha: values.password,
+      });
     } catch (error) {
       console.log(error);
+      if (error instanceof AxiosError && error.response?.status === 400) {
+        return setError("password", {
+          message: "Esta senha não corresponde a senha cadastrada.",
+        });
+      }
+      Alert.alert(
+        "Erro",
+        "Ocorreu um erro inesperado. Tente novamente em alguns segundos.",
+      );
     }
-  }
+  });
 
   return (
     <View className="flex-1">
@@ -60,7 +78,7 @@ export const Login: React.FC<LoginProps> = () => {
               </Text>
               <Controller
                 control={control}
-                name="identifier"
+                name="email"
                 render={({
                   field: { value, onChange },
                   fieldState: { error },
@@ -107,10 +125,9 @@ export const Login: React.FC<LoginProps> = () => {
                 Não tem conta?{" "}
               </Text>
               <Text
-                className="text-[#FB923C] underline font-medium"
+                className="text-[#f97316] underline font-medium"
                 onPress={() => navigate("Register")}
               >
-                {" "}
                 Cadastre-se
               </Text>
             </View>
@@ -118,11 +135,16 @@ export const Login: React.FC<LoginProps> = () => {
             <View className="mt-5">
               <TouchableOpacity
                 onPress={handleLogin}
-                className="rounded-2xl bg-[#FB923C] px-4 py-4 mt-4"
+                disabled={isSubmitting}
+                className="rounded-2xl bg-[#f97316] px-4 py-4 mt-4"
               >
-                <Text className="text-lg font-medium text-[#FFFFFF] text-center">
-                  Entrar
-                </Text>
+                {isSubmitting ? (
+                  <ActivityIndicator size={20} color={"#FFFFFF"} />
+                ) : (
+                  <Text className="text-lg font-medium text-[#FFFFFF] text-center">
+                    Entrar
+                  </Text>
+                )}
               </TouchableOpacity>
             </View>
           </View>

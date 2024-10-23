@@ -137,7 +137,7 @@ export const Register: React.FC<RegisterProps> = () => {
                 </Text>
                 <Text
                   onPress={() => navigate("Login")}
-                  className="text-[#FB923C] underline font-medium"
+                  className="text-[#f97316] underline font-medium"
                 >
                   {" "}
                   Login
@@ -147,7 +147,7 @@ export const Register: React.FC<RegisterProps> = () => {
               <View className="mt-5">
                 <TouchableOpacity
                   onPress={() => {}}
-                  className="rounded-2xl bg-[#FB923C] px-4 py-4 mt-4"
+                  className="rounded-2xl bg-[#f97316] px-4 py-4 mt-4"
                 >
                   <Text className="text-lg font-medium text-[#FFFFFF] text-center">
                     Cadastrar

@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const loginValidationSchema = z.object({
-  identifier: z
+  email: z
     .string({ required_error: "Este campo é obrigatório." })
     .min(1, "Este campo é obrigatório.")
     .trim(),

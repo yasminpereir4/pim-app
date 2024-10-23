@@ -15,7 +15,7 @@ export const GoBackButton: React.FC<GoBackButtonProps> = ({ onPress }) => {
       }}
       className="z-10 top-[40px] left-[20px] w-12 h-10 rounded-full items-center justify-center absolute"
     >
-      <Feather name="arrow-left" size={24} color="#FB923C" />
+      <Feather name="arrow-left" size={24} color="#f97316" />
     </TouchableOpacity>
   );
 };

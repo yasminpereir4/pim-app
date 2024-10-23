@@ -7,9 +7,9 @@ export const Index: React.FC<IndexProps> = () => {
   const { navigate } = useNavigation();
 
   return (
-    <View className="flex-1 bg-[#FB923C] p-6">
+    <View className="flex-1 bg-[#f97316] p-6">
       <View className="justify-center items-center flex-1 ">
-        <Image alt="" source={require("../../assets/logo-white.png")} />
+        <Image alt="" source={require("../../assets/newlogo.png")} />
 
         <Text className="text-5xl mr-auto font-black text-white mt-6">
           FarmTech
@@ -23,7 +23,7 @@ export const Index: React.FC<IndexProps> = () => {
           onPress={() => navigate("Login")}
           className="rounded-full bg-white px-4 py-4 mt-4"
         >
-          <Text className="text-lg font-medium text-[#FB923C] text-center">
+          <Text className="text-lg font-medium text-[#f97316] text-center">
             Começar
           </Text>
         </TouchableOpacity>
