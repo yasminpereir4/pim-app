@@ -32,13 +32,13 @@ export const Profile: React.FC<ProfileProps> = () => {
           </View>
           <View className="mt-10 mr-auto px-8">
             <View className="w-72 h-[0.2] bg-black" />
-            <Text className="text-lg capitalize mr-auto font-medium text-white mt-4">
+            <Text className="text-lg capitalize  font-medium text-white mt-4">
               Nome: {user?.nome}{" "}
             </Text>
-            <Text className="text-lg capitalize mr-auto font-medium text-white mt-4">
+            <Text className="text-lg font-medium text-white mt-4">
               Email: {user?.email}{" "}
             </Text>
-            <Text className="text-lg capitalize mr-auto mb-8 font-medium text-white mt-4">
+            <Text className="text-lg capitalize  mb-8 font-medium text-white mt-4">
               Função: {user?.funcao}{" "}
             </Text>
           </View>

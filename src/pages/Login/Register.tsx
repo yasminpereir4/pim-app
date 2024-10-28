@@ -2,6 +2,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigation } from "@react-navigation/native";
 import { Controller, useForm } from "react-hook-form";
 import {
+  ActivityIndicator,
+  Alert,
   Image,
   ImageBackground,
   ScrollView,
@@ -9,10 +11,12 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { AuthApi } from "../../api/auth";
 import { ErrorMessage } from "../../components/ErrorMessage";
 import { GoBackButton } from "../../components/GoBackButton";
 import { InputPassword } from "../../components/InputPassword";
 import { InputText } from "../../components/InputText";
+import { useAuthContext } from "../../contexts/AuthContext";
 import {
   RegisterFormInput,
   registerValidationSchema,
@@ -21,6 +25,7 @@ import {
 interface RegisterProps {}
 
 export const Register: React.FC<RegisterProps> = () => {
+  const { login } = useAuthContext();
   const { goBack, navigate } = useNavigation();
   const {
     control,
@@ -28,6 +33,27 @@ export const Register: React.FC<RegisterProps> = () => {
     formState: { isSubmitting },
   } = useForm<RegisterFormInput>({
     resolver: zodResolver(registerValidationSchema),
+  });
+
+  const handleRegister = handleSubmit(async values => {
+    try {
+      await AuthApi.register({
+        nome: values.fullName,
+        email: values.email,
+        senha: values.password,
+        funcao: values.role,
+      });
+      await login({
+        email: values.email,
+        senha: values.password,
+      });
+    } catch (error) {
+      console.log(error);
+      Alert.alert(
+        "Erro",
+        "Ocorreu um erro inesperado. Tente novamente em alguns segundos.",
+      );
+    }
   });
 
   return (
@@ -81,6 +107,25 @@ export const Register: React.FC<RegisterProps> = () => {
                       <View>
                         <InputText
                           placeholder="Endereço de email"
+                          value={value}
+                          onChangeText={onChange}
+                        />
+                        <ErrorMessage message={error?.message} />
+                      </View>
+                    )}
+                  />
+                </View>
+                <View className="relative mt-5 space-y-2">
+                  <Controller
+                    control={control}
+                    name="role"
+                    render={({
+                      field: { value, onChange },
+                      fieldState: { error },
+                    }) => (
+                      <View>
+                        <InputText
+                          placeholder="Função"
                           value={value}
                           onChangeText={onChange}
                         />
@@ -146,12 +191,17 @@ export const Register: React.FC<RegisterProps> = () => {
 
               <View className="mt-5">
                 <TouchableOpacity
-                  onPress={() => {}}
+                  disabled={isSubmitting}
+                  onPress={handleRegister}
                   className="rounded-2xl bg-[#f97316] px-4 py-4 mt-4"
                 >
-                  <Text className="text-lg font-medium text-[#FFFFFF] text-center">
-                    Cadastrar
-                  </Text>
+                  {isSubmitting ? (
+                    <ActivityIndicator color={"#FFFFFF"} size={24} />
+                  ) : (
+                    <Text className="text-lg font-medium text-[#FFFFFF] text-center">
+                      Cadastrar
+                    </Text>
+                  )}
                 </TouchableOpacity>
               </View>
             </ScrollView>
