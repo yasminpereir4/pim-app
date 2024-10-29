@@ -11,7 +11,7 @@ export const BackgroundCircleIconNavigator: React.FC<
   return (
     <View
       style={{
-        backgroundColor: focused ? "#FFFFFF" : undefined,
+        backgroundColor: focused ? "#fb923c" : undefined,
       }}
       className="w-[52px] h-[52px] items-center rounded-full justify-center"
     >

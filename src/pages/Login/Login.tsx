@@ -6,7 +6,6 @@ import {
   ActivityIndicator,
   Alert,
   Image,
-  ImageBackground,
   Text,
   TouchableOpacity,
   View,
@@ -54,102 +53,90 @@ export const Login: React.FC<LoginProps> = () => {
 
   return (
     <View className="flex-1">
-      <ImageBackground
-        blurRadius={5}
-        resizeMode="cover"
-        className="w-full h-full blur-[10px]"
-        source={require("../../assets/farm.png")}
-      >
-        <GoBackButton onPress={() => goBack()} />
-        <View className="p-4 justify-center flex-1">
-          <View
-            className="rounded-2xl justify-center p-4"
-            style={{
-              backgroundColor: "rgba(255, 255, 255, 0.8)",
-            }}
-          >
-            <View className="items-center">
-              <Image alt="" source={require("../../assets/logo.png")} />
-            </View>
-
-            <View className="mt-4 space-y-2">
-              <Text className="ml-2 text-[#505050] font-normal mb-2">
-                E-mail
-              </Text>
-              <Controller
-                control={control}
-                name="email"
-                render={({
-                  field: { value, onChange },
-                  fieldState: { error },
-                }) => (
-                  <View>
-                    <InputText
-                      value={value}
-                      variant="secondary"
-                      autoCapitalize="none"
-                      onChangeText={onChange}
-                      placeholder="seu@email.com"
-                    />
-                    <ErrorMessage message={error?.message} />
-                  </View>
-                )}
-              />
-            </View>
-            <View className="mt-5 space-y-2">
-              <Text className="ml-2 text-[#505050] font-normal mb-2">
-                Senha
-              </Text>
-              <Controller
-                control={control}
-                name="password"
-                render={({
-                  field: { value, onChange },
-                  fieldState: { error },
-                }) => (
-                  <View>
-                    <InputPassword
-                      variant="secondary"
-                      placeholder="*******"
-                      value={value}
-                      onChangeText={onChange}
-                    />
-                    <ErrorMessage message={error?.message} />
-                  </View>
-                )}
-              />
-            </View>
-
-            <View className="flex-row mt-4">
-              <Text className="text-[#505050] font-normal">
-                Não tem conta?{" "}
-              </Text>
-              <Text
-                className="text-[#f97316] underline font-medium"
-                onPress={() => navigate("Register")}
-              >
-                Cadastre-se
-              </Text>
-            </View>
-
-            <View className="mt-5">
-              <TouchableOpacity
-                onPress={handleLogin}
-                disabled={isSubmitting}
-                className="rounded-2xl bg-[#f97316] px-4 py-4 mt-4"
-              >
-                {isSubmitting ? (
-                  <ActivityIndicator size={20} color={"#FFFFFF"} />
-                ) : (
-                  <Text className="text-lg font-medium text-[#FFFFFF] text-center">
-                    Entrar
-                  </Text>
-                )}
-              </TouchableOpacity>
-            </View>
-          </View>
+      <GoBackButton onPress={() => goBack()} />
+      <View className="p-4 mt-20 justify-center flex-1">
+        <View className="items-center">
+          <Text className="text-5xl font-black text-[#1c1917] mt-6">
+            FarmTech
+          </Text>
         </View>
-      </ImageBackground>
+
+        <View className="mt-8 space-y-2">
+          <Controller
+            control={control}
+            name="email"
+            render={({ field: { value, onChange }, fieldState: { error } }) => (
+              <View>
+                <InputText
+                  value={value}
+                  variant="secondary"
+                  autoCapitalize="none"
+                  onChangeText={onChange}
+                  placeholder="seu@email.com"
+                  style={{
+                    backgroundColor: "white",
+                  }}
+                />
+                <ErrorMessage message={error?.message} />
+              </View>
+            )}
+          />
+        </View>
+        <View className="mt-5 space-y-2">
+          <Controller
+            control={control}
+            name="password"
+            render={({ field: { value, onChange }, fieldState: { error } }) => (
+              <View>
+                <InputPassword
+                  variant="secondary"
+                  placeholder="*******"
+                  value={value}
+                  onChangeText={onChange}
+                  style={{
+                    backgroundColor: "white",
+                  }}
+                />
+                <ErrorMessage message={error?.message} />
+              </View>
+            )}
+          />
+        </View>
+
+        <View className="mt-5">
+          <TouchableOpacity
+            onPress={handleLogin}
+            disabled={isSubmitting}
+            style={{ elevation: 3 }}
+            className="rounded-2xl bg-[#f97316] px-4 py-4 mt-4"
+          >
+            {isSubmitting ? (
+              <ActivityIndicator size={20} color={"#FFFFFF"} />
+            ) : (
+              <Text className="text-lg font-medium text-[#FFFFFF] text-center">
+                Entrar
+              </Text>
+            )}
+          </TouchableOpacity>
+        </View>
+      </View>
+      <View className="items-center">
+        <Image
+          className="w-full h-[150px]"
+          source={require("../../assets/wave.png")}
+        />
+        <View className="flex-row absolute bottom-8 ">
+          <Text className="text-white font-medium text-lg">
+            Não tem conta?{" "}
+          </Text>
+          <Text
+            className="text-white font-medium text-lg"
+            onPress={() => navigate("Register")}
+          >
+            Cadastre-se
+          </Text>
+        </View>
+      </View>
     </View>
   );
 };

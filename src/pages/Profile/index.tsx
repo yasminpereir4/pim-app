@@ -1,7 +1,7 @@
-import AntDesign from "@expo/vector-icons/AntDesign";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { Alert, Text, TouchableOpacity, View } from "react-native";
-import { TopMenu } from "../../components/TopMenu";
 import { useAuthContext } from "../../contexts/AuthContext";
+import { getInitials } from "../../utils/getInitials";
 
 interface ProfileProps {}
 
@@ -12,45 +12,44 @@ export const Profile: React.FC<ProfileProps> = () => {
     Alert.alert("Atenção", "Deseja sair da conta?", [
       {
         text: "Voltar",
-        onPress: () => console.log("Cancel Pressed"),
         style: "cancel",
       },
       { text: "Sair", onPress: () => logout(), style: "destructive" },
     ]);
   }
-
   return (
-    <View className="flex-1 bg-white">
-      <TopMenu />
-      <View className="p-5">
-        <View
-          className="bg-[#fdba74] w-auto h-auto rounded-lg items-center justify-center"
-          style={{ elevation: 2 }}
-        >
-          <View className="bg-[#ffedd5] mt-8 rounded-full w-40 items-center h-40 justify-center">
-            <AntDesign name="user" size={80} color="#f97316" />
+    <View className="flex-1">
+      <View className="w-full h-[210px] bg-[#fb923c] justify-center">
+        <View className="flex-row items-center ml-5 justify-between">
+          <View className="flex-row gap-5 ">
+            <View className="bg-white rounded-full w-16 aspect-square justify-center items-center">
+              <Text className="text-[#fb923c] font-bold text-xl">
+                {getInitials(user!.nome)}
+              </Text>
+            </View>
+            <View className="flex-col">
+              <Text className="text-white font-semibold text-lg capitalize">
+                {user!.nome}
+              </Text>
+              <Text className="text-white text-base">{user!.email}</Text>
+            </View>
           </View>
-          <View className="mt-10 mr-auto px-8">
-            <View className="w-72 h-[0.2] bg-black" />
-            <Text className="text-lg capitalize  font-medium text-white mt-4">
-              Nome: {user?.nome}{" "}
-            </Text>
-            <Text className="text-lg font-medium text-white mt-4">
-              Email: {user?.email}{" "}
-            </Text>
-            <Text className="text-lg capitalize  mb-8 font-medium text-white mt-4">
-              Função: {user?.funcao}{" "}
-            </Text>
-          </View>
+
+          <TouchableOpacity className="mr-5" onPress={handleLogout}>
+            <MaterialIcons name="logout" size={30} color="white" />
+          </TouchableOpacity>
         </View>
       </View>
-
-      <TouchableOpacity
-        onPress={handleLogout}
-        className="p-5 absolute right-0 bottom-20 flex-1"
-      >
-        <AntDesign name="logout" size={30} color="black" />
-      </TouchableOpacity>
+      <View className="relative bottom-8 px-4">
+        <View
+          className="bg-white rounded-lg w-full py-4 items-center justify-center"
+          style={{ elevation: 4 }}
+        >
+          <Text className="text-[#1c1917] font-medium text-lg">
+            Cargo: {user!.funcao}
+          </Text>
+        </View>
+      </View>
     </View>
   );
 };

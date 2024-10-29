@@ -11,11 +11,11 @@ export const GoBackButton: React.FC<GoBackButtonProps> = ({ onPress }) => {
     <TouchableOpacity
       onPress={onPress}
       style={{
-        backgroundColor: "rgba(255, 255, 255, 0.8)",
+        backgroundColor: "#f97316",
       }}
       className="z-10 top-[40px] left-[20px] w-12 h-10 rounded-full items-center justify-center absolute"
     >
-      <Feather name="arrow-left" size={24} color="#f97316" />
+      <Feather name="arrow-left" size={24} color="white" />
     </TouchableOpacity>
   );
 };

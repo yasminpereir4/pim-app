@@ -33,12 +33,13 @@ export const Routes: React.FC<RoutesProps> = () => {
         ),
         tabBarActiveTintColor: "#FFFFFF",
         tabBarStyle: {
-          height: 80,
+          height: 100,
           elevation: 0,
-          borderTopWidth: 0,
           shadowOpacity: 0,
           position: "absolute",
-          backgroundColor: "#f97316",
+          borderTopLeftRadius: 30,
+          borderTopRightRadius: 30,
+          backgroundColor: "#FFFFFF",
         },
         tabBarLabelStyle: {
           fontSize: 12,
@@ -58,7 +59,7 @@ export const Routes: React.FC<RoutesProps> = () => {
               <Entypo
                 name="home"
                 size={size}
-                color={focused ? "#f97316" : "#FFFFFF"}
+                color={focused ? "#FFFFFF" : "#4b5563"}
               />
             </BackgroundCircleIconNavigator>
           ),
@@ -73,7 +74,7 @@ export const Routes: React.FC<RoutesProps> = () => {
               <Feather
                 name="user"
                 size={size}
-                color={focused ? "#f97316" : "#FFFFFF"}
+                color={focused ? "#FFFFFF" : "#4b5563"}
               />
             </BackgroundCircleIconNavigator>
           ),

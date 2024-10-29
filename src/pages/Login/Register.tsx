@@ -4,8 +4,6 @@ import { Controller, useForm } from "react-hook-form";
 import {
   ActivityIndicator,
   Alert,
-  Image,
-  ImageBackground,
   ScrollView,
   Text,
   TouchableOpacity,
@@ -57,157 +55,146 @@ export const Register: React.FC<RegisterProps> = () => {
   });
 
   return (
-    <View className="flex-1 ">
-      <ImageBackground
-        blurRadius={5}
-        resizeMode="cover"
-        className="w-full h-full blur-[10px]"
-        source={require("../../assets/farm.png")}
-      >
-        <GoBackButton onPress={() => goBack()} />
-        <View className="p-4 justify-center flex-1">
-          <View className="justify-center ">
-            <ScrollView
-              contentContainerStyle={{
-                padding: 16,
-                borderRadius: 16,
-                justifyContent: "center",
-                backgroundColor: "rgba(255, 255, 255, 0.8)",
-              }}
+    <ScrollView contentContainerStyle={{ flex: 1 }}>
+      <GoBackButton onPress={() => goBack()} />
+      <View className="p-4 justify-center flex-1">
+        <View className="justify-center ">
+          <View className="items-center">
+            <Text className="text-5xl  font-black text-[#1c1917] mt-6">
+              FarmTech
+            </Text>
+          </View>
+          <View className="mt-5">
+            <Controller
+              control={control}
+              name="fullName"
+              render={({
+                field: { value, onChange },
+                fieldState: { error },
+              }) => (
+                <View>
+                  <InputText
+                    placeholder="Nome completo"
+                    value={value}
+                    onChangeText={onChange}
+                    style={{
+                      backgroundColor: "white",
+                    }}
+                  />
+                  <ErrorMessage message={error?.message} />
+                </View>
+              )}
+            />
+            <View className="relative mt-5 space-y-2">
+              <Controller
+                control={control}
+                name="email"
+                render={({
+                  field: { value, onChange },
+                  fieldState: { error },
+                }) => (
+                  <View>
+                    <InputText
+                      placeholder="Endereço de email"
+                      value={value}
+                      onChangeText={onChange}
+                      style={{
+                        backgroundColor: "white",
+                      }}
+                    />
+                    <ErrorMessage message={error?.message} />
+                  </View>
+                )}
+              />
+            </View>
+            <View className="relative mt-5 space-y-2">
+              <Controller
+                control={control}
+                name="role"
+                render={({
+                  field: { value, onChange },
+                  fieldState: { error },
+                }) => (
+                  <View>
+                    <InputText
+                      placeholder="Função"
+                      value={value}
+                      style={{
+                        backgroundColor: "white",
+                      }}
+                      onChangeText={onChange}
+                    />
+                    <ErrorMessage message={error?.message} />
+                  </View>
+                )}
+              />
+            </View>
+
+            <View className="relative mt-5 space-y-2">
+              <Controller
+                name="password"
+                control={control}
+                render={({
+                  field: { value, onChange },
+                  fieldState: { error },
+                }) => (
+                  <View>
+                    <InputPassword
+                      placeholder="*******"
+                      value={value}
+                      onChangeText={onChange}
+                      style={{
+                        backgroundColor: "white",
+                      }}
+                    />
+                    <ErrorMessage message={error?.message} />
+                  </View>
+                )}
+              />
+            </View>
+
+            <View className="relative mt-5 space-y-2">
+              <Controller
+                name="passwordConfirmation"
+                control={control}
+                render={({
+                  field: { value, onChange },
+                  fieldState: { error },
+                }) => (
+                  <View>
+                    <InputPassword
+                      placeholder="*******"
+                      value={value}
+                      onChangeText={onChange}
+                      style={{
+                        backgroundColor: "white",
+                      }}
+                    />
+                    <ErrorMessage message={error?.message} />
+                  </View>
+                )}
+              />
+            </View>
+          </View>
+
+          <View className="mt-5">
+            <TouchableOpacity
+              disabled={isSubmitting}
+              onPress={handleRegister}
+              style={{ elevation: 3 }}
+              className="rounded-2xl bg-[#f97316] px-4 py-4 mt-4"
             >
-              <View className="items-center">
-                <Image alt="" source={require("../../assets/logo.png")} />
-              </View>
-              <View className="mt-5">
-                <Controller
-                  control={control}
-                  name="fullName"
-                  render={({
-                    field: { value, onChange },
-                    fieldState: { error },
-                  }) => (
-                    <View>
-                      <InputText
-                        placeholder="Nome completo"
-                        value={value}
-                        onChangeText={onChange}
-                      />
-                      <ErrorMessage message={error?.message} />
-                    </View>
-                  )}
-                />
-                <View className="relative mt-5 space-y-2">
-                  <Controller
-                    control={control}
-                    name="email"
-                    render={({
-                      field: { value, onChange },
-                      fieldState: { error },
-                    }) => (
-                      <View>
-                        <InputText
-                          placeholder="Endereço de email"
-                          value={value}
-                          onChangeText={onChange}
-                        />
-                        <ErrorMessage message={error?.message} />
-                      </View>
-                    )}
-                  />
-                </View>
-                <View className="relative mt-5 space-y-2">
-                  <Controller
-                    control={control}
-                    name="role"
-                    render={({
-                      field: { value, onChange },
-                      fieldState: { error },
-                    }) => (
-                      <View>
-                        <InputText
-                          placeholder="Função"
-                          value={value}
-                          onChangeText={onChange}
-                        />
-                        <ErrorMessage message={error?.message} />
-                      </View>
-                    )}
-                  />
-                </View>
-
-                <View className="relative mt-5 space-y-2">
-                  <Controller
-                    name="password"
-                    control={control}
-                    render={({
-                      field: { value, onChange },
-                      fieldState: { error },
-                    }) => (
-                      <View>
-                        <InputPassword
-                          placeholder="*******"
-                          value={value}
-                          onChangeText={onChange}
-                        />
-                        <ErrorMessage message={error?.message} />
-                      </View>
-                    )}
-                  />
-                </View>
-
-                <View className="relative mt-5 space-y-2">
-                  <Controller
-                    name="passwordConfirmation"
-                    control={control}
-                    render={({
-                      field: { value, onChange },
-                      fieldState: { error },
-                    }) => (
-                      <View>
-                        <InputPassword
-                          placeholder="*******"
-                          value={value}
-                          onChangeText={onChange}
-                        />
-                        <ErrorMessage message={error?.message} />
-                      </View>
-                    )}
-                  />
-                </View>
-              </View>
-
-              <View className="flex-row mt-4">
-                <Text className="text-[#505050] font-normal">
-                  Já possui conta?{" "}
+              {isSubmitting ? (
+                <ActivityIndicator color={"#FFFFFF"} size={24} />
+              ) : (
+                <Text className="text-lg font-medium text-[#FFFFFF] text-center">
+                  Cadastrar
                 </Text>
-                <Text
-                  onPress={() => navigate("Login")}
-                  className="text-[#f97316] underline font-medium"
-                >
-                  {" "}
-                  Login
-                </Text>
-              </View>
-
-              <View className="mt-5">
-                <TouchableOpacity
-                  disabled={isSubmitting}
-                  onPress={handleRegister}
-                  className="rounded-2xl bg-[#f97316] px-4 py-4 mt-4"
-                >
-                  {isSubmitting ? (
-                    <ActivityIndicator color={"#FFFFFF"} size={24} />
-                  ) : (
-                    <Text className="text-lg font-medium text-[#FFFFFF] text-center">
-                      Cadastrar
-                    </Text>
-                  )}
-                </TouchableOpacity>
-              </View>
-            </ScrollView>
+              )}
+            </TouchableOpacity>
           </View>
         </View>
-      </ImageBackground>
-    </View>
+      </View>
+    </ScrollView>
   );
 };
