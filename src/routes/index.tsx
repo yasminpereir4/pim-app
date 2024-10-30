@@ -1,6 +1,7 @@
 import Entypo from "@expo/vector-icons/Entypo";
 import Feather from "@expo/vector-icons/Feather";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
 import { BlurView } from "expo-blur";
 import { StyleSheet } from "react-native";
 import { BackgroundCircleIconNavigator } from "../components/BackgroundCircleIconNavigator";
@@ -10,6 +11,10 @@ import { HomeStack } from "./HomeStack";
 import { ProfileStack } from "./ProfileStack";
 
 const Tab = createBottomTabNavigator();
+
+type Screen = keyof ReactNavigation.RootParamList;
+
+const screensWithoutTabbar: Screen[] = ["AllProducts"];
 
 interface RoutesProps {}
 
@@ -22,32 +27,38 @@ export const Routes: React.FC<RoutesProps> = () => {
 
   return (
     <Tab.Navigator
-      screenOptions={{
-        headerShown: false,
-        tabBarBackground: () => (
-          <BlurView
-            tint="light"
-            intensity={2}
-            style={StyleSheet.absoluteFill}
-          />
-        ),
-        tabBarActiveTintColor: "#FFFFFF",
-        tabBarStyle: {
-          height: 100,
-          elevation: 0,
-          shadowOpacity: 0,
-          position: "absolute",
-          borderTopLeftRadius: 30,
-          borderTopRightRadius: 30,
-          backgroundColor: "#FFFFFF",
-        },
-        tabBarLabelStyle: {
-          fontSize: 12,
-          marginTop: -8,
-          marginBottom: 7,
-          fontWeight: "400",
-        },
-        tabBarLabel: () => null,
+      screenOptions={({ route }) => {
+        const routeName = getFocusedRouteNameFromRoute(route) ?? route.name;
+        const tabBarHidden = screensWithoutTabbar.includes(routeName as Screen);
+
+        return {
+          headerShown: false,
+          tabBarBackground: () => (
+            <BlurView
+              tint="light"
+              intensity={2}
+              style={StyleSheet.absoluteFill}
+            />
+          ),
+          tabBarActiveTintColor: "#FFFFFF",
+          tabBarStyle: {
+            height: 100,
+            elevation: 0,
+            shadowOpacity: 0,
+            position: "absolute",
+            borderTopLeftRadius: 30,
+            borderTopRightRadius: 30,
+            backgroundColor: "#FFFFFF",
+            display: tabBarHidden ? "none" : "flex",
+          },
+          tabBarLabelStyle: {
+            fontSize: 12,
+            marginTop: -8,
+            marginBottom: 7,
+            fontWeight: "400",
+          },
+          tabBarLabel: () => null,
+        };
       }}
     >
       <Tab.Screen

@@ -1,3 +1,5 @@
+import AntDesign from "@expo/vector-icons/AntDesign";
+import Ionicons from "@expo/vector-icons/Ionicons";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { Alert, Text, TouchableOpacity, View } from "react-native";
 import { useAuthContext } from "../../contexts/AuthContext";
@@ -34,10 +36,6 @@ export const Profile: React.FC<ProfileProps> = () => {
               <Text className="text-white text-base">{user!.email}</Text>
             </View>
           </View>
-
-          <TouchableOpacity className="mr-5" onPress={handleLogout}>
-            <MaterialIcons name="logout" size={30} color="white" />
-          </TouchableOpacity>
         </View>
       </View>
       <View className="relative bottom-8 px-4">
@@ -48,6 +46,40 @@ export const Profile: React.FC<ProfileProps> = () => {
           <Text className="text-[#1c1917] font-medium text-lg">
             Cargo: {user!.funcao}
           </Text>
+        </View>
+      </View>
+      <View className="px-4">
+        <View
+          style={{ elevation: 4 }}
+          className="bg-white rounded-lg  w-full py-4 mb-4"
+        >
+          <View className="px-4 ml-3 flex-row gap-4">
+            <Ionicons name="chatbubble" size={24} color="#fb923c" />
+            <Text className="text-[#1c1917] font-medium text-lg">
+              Comunicados
+            </Text>
+          </View>
+        </View>
+        <View
+          style={{ elevation: 4 }}
+          className="bg-white rounded-lg  w-full py-4 mb-4"
+        >
+          <View className="px-4 ml-3 flex-row gap-4">
+            <AntDesign name="exclamationcircle" size={24} color="#fb923c" />
+            <Text className="text-[#1c1917] font-medium text-lg">Suporte</Text>
+          </View>
+        </View>
+        <View
+          style={{ elevation: 4 }}
+          className="bg-white rounded-lg  w-full py-4 mb-4"
+        >
+          <TouchableOpacity
+            onPress={handleLogout}
+            className="px-4 ml-3 flex-row gap-4"
+          >
+            <MaterialIcons name="logout" size={30} color="#fb923c" />
+            <Text className="text-[#1c1917] font-medium text-lg">Sair</Text>
+          </TouchableOpacity>
         </View>
       </View>
     </View>
