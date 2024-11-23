@@ -20,10 +20,11 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 
   return (
     <View
-      className="px-4 py-2 rounded-xl  bg-[#ffedd5] h-full mb-4"
+      className="px-4 py-2 rounded-xl bg-[#ffedd5] h-[280px] mb-4"
       style={{
         width: SERVICE_CARD_WIDTH,
         marginBottom: 10,
+        elevation: 2,
       }}
     >
       <View className="absolute top-0 right-0 z-10">
@@ -45,13 +46,13 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         <TouchableOpacity
           onPress={() => setFavoritedProduct(!favoritedProduct)}
         >
-          <AntDesign name="hearto" size={24} color="#1c1917" />
+          <AntDesign name="heart" size={24} color="#1c1917" />
         </TouchableOpacity>
       ) : (
         <TouchableOpacity
           onPress={() => setFavoritedProduct(!favoritedProduct)}
         >
-          <AntDesign name="heart" size={24} color="#1c1917" />
+          <AntDesign name="hearto" size={24} color="#1c1917" />
         </TouchableOpacity>
       )}
     </View>

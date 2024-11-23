@@ -1,9 +1,20 @@
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
-import { Fragment, useCallback } from "react";
-import { ActivityIndicator, FlatList, Text, View } from "react-native";
+import { useCallback } from "react";
+import {
+  ActivityIndicator,
+  Dimensions,
+  FlatList,
+  Text,
+  View,
+} from "react-native";
 import { GoBackButton } from "../../components/GoBackButton";
 import { ProductCardLarge } from "../../components/ProductCardLarge";
 import { useGetAllProducts } from "../../hooks/useGetAllProducts";
+
+const gap = 16;
+const screenSidePadding = 20;
+const cardWidth =
+  (Dimensions.get("window").width - (screenSidePadding * 2 + gap)) / 2;
 
 interface AllProductsProps {}
 
@@ -19,7 +30,9 @@ export const AllProducts: React.FC<AllProductsProps> = () => {
 
   return (
     <View className="flex-1 bg-white">
-      <GoBackButton onPress={() => goBack()} />
+      <View className="flex-row justify-between items-center">
+        <GoBackButton onPress={() => goBack()} />
+      </View>
 
       {isLoading ? (
         <ActivityIndicator size={30} color={"#fb923c"} />
@@ -28,29 +41,38 @@ export const AllProducts: React.FC<AllProductsProps> = () => {
           Houve um erro inesperado.
         </Text>
       ) : (
-        <Fragment>
-          <Text className="text-2xl p-4 mt-20 font-black  text-[#1c1917] ">
-            Conheça todos os produtos
-          </Text>
+        <View className="mt-24">
           <FlatList
             data={data?.dados}
             keyExtractor={item => item.id.toString()}
             showsHorizontalScrollIndicator={false}
             contentContainerStyle={{
-              paddingHorizontal: 16,
-              paddingBottom: 48,
+              paddingTop: 10,
+              paddingBottom: 16,
+              paddingHorizontal: screenSidePadding,
             }}
-            renderItem={({ item }) => (
+            numColumns={2}
+            columnWrapperStyle={{
+              justifyContent: "space-between",
+            }}
+            renderItem={({ item, index }) => (
               <ProductCardLarge
                 image={item.imagem}
                 price={item.preco}
                 product={item.produto}
                 quantity={item.quantidade}
                 description={item.descricao}
+                style={{
+                  width: cardWidth,
+                  marginTop: index > 1 ? gap : 0,
+                  marginBottom: index > 1 ? gap : 0,
+                  marginLeft: (index + 1) % 2 === 0 ? gap : 0,
+                  elevation: 2,
+                }}
               />
             )}
           />
-        </Fragment>
+        </View>
       )}
     </View>
   );

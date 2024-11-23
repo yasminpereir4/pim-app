@@ -1,3 +1,6 @@
+import Entypo from "@expo/vector-icons/Entypo";
+import FontAwesome from "@expo/vector-icons/FontAwesome";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { useCallback } from "react";
 import {
@@ -12,6 +15,7 @@ import {
 } from "react-native";
 import Carousel from "react-native-reanimated-carousel";
 import { ProductCard } from "../../components/ProductCard";
+import { Widget } from "../../components/Widget";
 import { useAuthContext } from "../../contexts/AuthContext";
 import { useGetAllProducts } from "../../hooks/useGetAllProducts";
 
@@ -112,7 +116,40 @@ export const Home: React.FC<HomeProps> = () => {
           )}
         />
       )}
-      <View className=" mb-[123px]" />
+
+      <View className="px-6 mt-10">
+        <Text className="text-[#fb923c] font-title text-2xl capitalize">
+          Quem somos
+        </Text>
+
+        <View className="mt-4">
+          <View className="mt-2 mb-2">
+            <Widget
+              icon={<FontAwesome name="envira" size={24} color="#fb923c" />}
+              title="Objetivo"
+            />
+          </View>
+          <View className="mt-2 mb-2">
+            <Widget
+              icon={
+                <MaterialIcons
+                  name="contact-support"
+                  size={24}
+                  color="#fb923c"
+                />
+              }
+              title="Contato"
+            />
+          </View>
+          <View className="mt-2 mb-2">
+            <Widget
+              icon={<Entypo name="unread" size={24} color="#fb923c" />}
+              title="Termos de uso"
+            />
+          </View>
+        </View>
+      </View>
+      <View className="mb-[123px]" />
     </ScrollView>
   );
 };

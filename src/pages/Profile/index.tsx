@@ -1,5 +1,3 @@
-import AntDesign from "@expo/vector-icons/AntDesign";
-import Ionicons from "@expo/vector-icons/Ionicons";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { Alert, Text, TouchableOpacity, View } from "react-native";
 import { useAuthContext } from "../../contexts/AuthContext";
@@ -20,7 +18,7 @@ export const Profile: React.FC<ProfileProps> = () => {
     ]);
   }
   return (
-    <View className="flex-1">
+    <View className="flex-1 bg-[#ffedd5]">
       <View className="w-full h-[210px] bg-[#fb923c] justify-center">
         <View className="flex-row items-center ml-5 justify-between">
           <View className="flex-row gap-5 ">
@@ -38,18 +36,19 @@ export const Profile: React.FC<ProfileProps> = () => {
           </View>
         </View>
       </View>
-      <View className="relative bottom-8 px-4">
+      <View className="relative bottom-4 px-4 ">
         <View
-          className="bg-white rounded-lg w-full py-4 items-center justify-center"
+          className="bg-[#FFF] rounded-lg w-full flex-row py-4 px-4 items-center"
           style={{ elevation: 4 }}
         >
-          <Text className="text-[#1c1917] font-medium text-lg">
+          <MaterialIcons name="badge" size={24} color="#fb923c" />
+          <Text className="text-base font-body mt-2 text-[#1c1917] ml-3 capitalize">
             Cargo: {user!.funcao}
           </Text>
         </View>
       </View>
       <View className="px-4">
-        <View
+        {/* <View
           style={{ elevation: 4 }}
           className="bg-white rounded-lg  w-full py-4 mb-4"
         >
@@ -59,8 +58,8 @@ export const Profile: React.FC<ProfileProps> = () => {
               Comunicados
             </Text>
           </View>
-        </View>
-        <View
+        </View> */}
+        {/* <View
           style={{ elevation: 4 }}
           className="bg-white rounded-lg  w-full py-4 mb-4"
         >
@@ -68,17 +67,19 @@ export const Profile: React.FC<ProfileProps> = () => {
             <AntDesign name="exclamationcircle" size={24} color="#fb923c" />
             <Text className="text-[#1c1917] font-medium text-lg">Suporte</Text>
           </View>
-        </View>
+        </View> */}
         <View
           style={{ elevation: 4 }}
-          className="bg-white rounded-lg  w-full py-4 mb-4"
+          className="bg-[#FFF] rounded-lg w-full py-4 mb-4"
         >
           <TouchableOpacity
             onPress={handleLogout}
-            className="px-4 ml-3 flex-row gap-4"
+            className="px-4 ml-3 flex-row gap-4 items-center"
           >
             <MaterialIcons name="logout" size={30} color="#fb923c" />
-            <Text className="text-[#1c1917] font-medium text-lg">Sair</Text>
+            <Text className="text-base font-body text-[#1c1917] ml-3 capitalize">
+              Sair
+            </Text>
           </TouchableOpacity>
         </View>
       </View>

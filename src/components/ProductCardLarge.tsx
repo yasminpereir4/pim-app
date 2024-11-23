@@ -1,10 +1,9 @@
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import { Image, Text, View } from "react-native";
+import { Image, Text, View, ViewProps } from "react-native";
 import { formatCurrency } from "../utils/formatCurrency";
 
 const SERVICE_CARD_WIDTH = 263;
 
-interface ProductCardLargeProps {
+interface ProductCardLargeProps extends ViewProps {
   image: string;
   price: number;
   product: string;
@@ -18,28 +17,33 @@ export const ProductCardLarge: React.FC<ProductCardLargeProps> = ({
   product,
   quantity,
   description,
+  ...props
 }) => {
   return (
-    <View className="p-4 rounded-xl bg-[#e7e5e4] h-auto mb-4 w-full">
-      <View className="flex-row justify-between mt-1.5 mb-2">
-        <Text className="text-base font-medium text-[#1c1917] capitalize">
-          {product}
-        </Text>
-        <MaterialIcons name="sell" size={24} color="#f97316" />
-      </View>
-      <View className="justify-center items-center rounded-xl  bg-white">
+    <View {...props} className="rounded-xl  bg-[#ffedd5] h-[230px]">
+      <View className="justify-center items-center rounded-xl bg-[#ffedd5]">
+        <View className="absolute top-0 right-0 z-10">
+          <View className="bg-[#fdba74] rounded-bl-xl rounded-tr-xl w-[68px] h-[33px] items-center justify-center">
+            <Text className="font-body text-sm text-[#1c1917] capitalize">
+              {formatCurrency(price)}
+            </Text>
+          </View>
+        </View>
         <Image width={150} height={150} source={{ uri: image }} />
       </View>
-      <Text className="mt-2 text-base font-normal text-[#1c1917] capitalize">
-        Preço: {formatCurrency(price)}
-      </Text>
-      <Text className="text-base font-normal text-[#1c1917] capitalize">
-        Quantidade: {quantity}
-      </Text>
+      <View className="p-4">
+        <Text className="text-base font-body mt-2 text-[#1c1917] capitalize">
+          {product}
+        </Text>
 
-      <Text className="text-base font-normal text-[#1c1917] capitalize">
-        {description}
-      </Text>
+        <Text className="font-body text-sm text-[#1c1917] capitalize">
+          Disponível: {quantity}
+        </Text>
+
+        {/* <Text className="font-body text-sm text-[#1c1917] capitalize">
+          {description}
+        </Text> */}
+      </View>
     </View>
   );
 };
