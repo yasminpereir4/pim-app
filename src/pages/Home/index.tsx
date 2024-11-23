@@ -31,26 +31,23 @@ export const Home: React.FC<HomeProps> = () => {
   );
 
   const images = [
-    { id: 1, source: require("~/assets/farm1.jpg") },
-    { id: 2, source: require("~/assets/farm2.jpg") },
+    { id: 1, source: require("~/assets/banner.png") },
+    { id: 2, source: require("~/assets/banner2.png") },
     { id: 3, source: require("~/assets/farm3.jpeg") },
   ];
 
   return (
-    <ScrollView className="flex-1 bg-white">
+    <ScrollView className="flex-1 bg-[#FDFDFD]">
       <View className="px-6 py-10 mt-10">
-        <Text className="text-[#1c1917] font-light text-2xl capitalize">
+        <Text className="text-[#fb923c] font-title text-2xl capitalize">
           Olá, {user?.nome}!
-        </Text>
-        <Text className="text-2xl font-black text-[#1c1917] mt-8">
-          Nossa fazenda
         </Text>
       </View>
 
       <View className="flex-1">
         <Carousel
           loop
-          height={240}
+          height={179}
           autoPlay
           width={dimensions.width}
           data={images}
@@ -75,15 +72,14 @@ export const Home: React.FC<HomeProps> = () => {
         />
       </View>
 
-      <View className="px-6 flex-row items-center justify-between">
-        <Text className="text-2xl font-black text-[#1c1917]">
+      <View className="px-6 mt-10 flex-row items-center justify-between">
+        <Text className="text-[#fb923c] font-title text-2xl capitalize">
           Nossos produtos
         </Text>
-        <TouchableOpacity
-          onPress={() => navigate("AllProducts")}
-          className="px-4 py-2 border-[1px] border-[#1c1917] rounded-full"
-        >
-          <Text className="text-base font-black text-[#1c1917]">Ver tudo</Text>
+        <TouchableOpacity onPress={() => navigate("AllProducts")}>
+          <Text className="text-base font-body underline text-[#1c1917]">
+            Ver tudo
+          </Text>
         </TouchableOpacity>
       </View>
 
@@ -112,8 +108,6 @@ export const Home: React.FC<HomeProps> = () => {
               image={item.imagem}
               price={item.preco}
               product={item.produto}
-              quantity={item.quantidade}
-              description={item.descricao}
             />
           )}
         />

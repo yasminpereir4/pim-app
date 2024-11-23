@@ -9,16 +9,16 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import {
+  RegisterFormInput,
+  registerValidationSchema,
+} from "../../../validation/register";
 import { AuthApi } from "../../api/auth";
 import { ErrorMessage } from "../../components/ErrorMessage";
 import { GoBackButton } from "../../components/GoBackButton";
 import { InputPassword } from "../../components/InputPassword";
 import { InputText } from "../../components/InputText";
 import { useAuthContext } from "../../contexts/AuthContext";
-import {
-  RegisterFormInput,
-  registerValidationSchema,
-} from "../../validation/register";
 
 interface RegisterProps {}
 

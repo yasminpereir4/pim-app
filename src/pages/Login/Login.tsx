@@ -10,12 +10,15 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import {
+  LoginFormInput,
+  loginValidationSchema,
+} from "../../../validation/login";
 import { ErrorMessage } from "../../components/ErrorMessage";
 import { GoBackButton } from "../../components/GoBackButton";
 import { InputPassword } from "../../components/InputPassword";
 import { InputText } from "../../components/InputText";
 import { useAuthContext } from "../../contexts/AuthContext";
-import { LoginFormInput, loginValidationSchema } from "../../validation/login";
 
 interface LoginProps {}
 
@@ -56,7 +59,7 @@ export const Login: React.FC<LoginProps> = () => {
       <GoBackButton onPress={() => goBack()} />
       <View className="p-4 mt-20 justify-center flex-1">
         <View className="items-center">
-          <Text className="text-5xl font-black text-[#1c1917] mt-6">
+          <Text className="text-4xl font-title text-[#1c1917] mt-6">
             FarmTech
           </Text>
         </View>
@@ -113,7 +116,7 @@ export const Login: React.FC<LoginProps> = () => {
             {isSubmitting ? (
               <ActivityIndicator size={20} color={"#FFFFFF"} />
             ) : (
-              <Text className="text-lg font-medium text-[#FFFFFF] text-center">
+              <Text className="text-lg font-body text-[#FFFFFF] text-center">
                 Entrar
               </Text>
             )}
@@ -126,11 +129,9 @@ export const Login: React.FC<LoginProps> = () => {
           source={require("../../assets/wave.png")}
         />
         <View className="flex-row absolute bottom-8 ">
-          <Text className="text-white font-medium text-lg">
-            Não tem conta?{" "}
-          </Text>
+          <Text className="text-white font-body text-lg">Não tem conta? </Text>
           <Text
-            className="text-white font-medium text-lg"
+            className="text-white font-body text-lg"
             onPress={() => navigate("Register")}
           >
             Cadastre-se

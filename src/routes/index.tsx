@@ -48,7 +48,7 @@ export const Routes: React.FC<RoutesProps> = () => {
             position: "absolute",
             borderTopLeftRadius: 30,
             borderTopRightRadius: 30,
-            backgroundColor: "#FFFFFF",
+            backgroundColor: "#FFFF",
             display: tabBarHidden ? "none" : "flex",
           },
           tabBarLabelStyle: {
