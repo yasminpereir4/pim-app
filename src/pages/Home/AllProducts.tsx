@@ -19,7 +19,7 @@ const cardWidth =
 interface AllProductsProps {}
 
 export const AllProducts: React.FC<AllProductsProps> = () => {
-  const { goBack } = useNavigation();
+  const { goBack, navigate } = useNavigation();
   const { data, refetch, isLoading, error } = useGetAllProducts();
 
   useFocusEffect(
@@ -57,9 +57,18 @@ export const AllProducts: React.FC<AllProductsProps> = () => {
             }}
             renderItem={({ item, index }) => (
               <ProductCardLarge
-                image={item.imagem}
                 price={item.preco}
+                image={item.imagem}
                 product={item.produto}
+                onPress={() =>
+                  navigate("ProductById", {
+                    title: item.produto,
+                    description: item.descricao,
+                    price: item.preco,
+                    quantity: item.quantidade,
+                    image: item.imagem,
+                  })
+                }
                 quantity={item.quantidade}
                 description={item.descricao}
                 style={{
