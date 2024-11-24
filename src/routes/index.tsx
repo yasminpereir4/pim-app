@@ -14,7 +14,13 @@ const Tab = createBottomTabNavigator();
 
 type Screen = keyof ReactNavigation.RootParamList;
 
-const screensWithoutTabbar: Screen[] = ["AllProducts"];
+const screensWithoutTabbar: Screen[] = [
+  "AllProducts",
+  "ProductById",
+  "Contact",
+  "Purpose",
+  "TermsOfUse",
+];
 
 interface RoutesProps {}
 

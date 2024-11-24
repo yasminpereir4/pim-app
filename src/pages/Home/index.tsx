@@ -125,12 +125,14 @@ export const Home: React.FC<HomeProps> = () => {
         <View className="mt-4">
           <View className="mt-2 mb-2">
             <Widget
+              onPress={() => navigate("Purpose")}
               icon={<FontAwesome name="envira" size={24} color="#fb923c" />}
               title="Objetivo"
             />
           </View>
           <View className="mt-2 mb-2">
             <Widget
+              onPress={() => navigate("Contact")}
               icon={
                 <MaterialIcons
                   name="contact-support"
@@ -143,6 +145,7 @@ export const Home: React.FC<HomeProps> = () => {
           </View>
           <View className="mt-2 mb-2">
             <Widget
+              onPress={() => navigate("TermsOfUse")}
               icon={<Entypo name="unread" size={24} color="#fb923c" />}
               title="Termos de uso"
             />
